@@ -26,8 +26,13 @@ if ( $status != 201 ) {
     die("Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl));
 }
 else{
+    $options = [
+        'salt' => uniqid(mt_rand(), true),
+        'cost' => 12
+    ];
+    $hash = password_hash($_POST["password"], PASSWORD_DEFAULT, $options);
     $conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
-    $query = "UPDATE `users` SET `authkey` = '". $json_response ."', `authenticated` = 'true', `password` = '". $_POST["password"] ."' WHERE id = '". $user["id"] ."'";
+    $query = "UPDATE `users` SET `authkey` = '". $json_response ."', `authenticated` = 'true', `password` = '". $hash ."' WHERE id = '". $user["id"] ."'";
     $result = mysqli_query($conn, $query);
     $_POST["success_auth"] = "true";
 }
