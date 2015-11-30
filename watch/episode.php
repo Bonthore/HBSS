@@ -46,27 +46,6 @@
 
         <ul class="filemanager-options">
             <li>
-                <div class="ckbox ckbox-default">
-                    <input type="checkbox" id="selectall" value="1" />
-                    <label for="selectall">Completed <?php
-                        $json = file_get_contents("http://hummingbird.me/api/v1/users/". $user["name"] ."/library");
-                        $hummingbird = json_decode($json, true);
-                        $i=0;
-                        while ($i<count($hummingbird)){
-                            if($hummingbird[$i]["anime"]["id"]==$_GET["id"] && $hummingbird[$i]["status"] == "completed") {
-                                $completed = "true";
-                            }
-                            $i++;
-                        }
-                        if (isset($completed)&& $completed == "true"){
-                            echo $completed;
-                        }
-                        else echo "false";
-
-                        ?></label>
-                </div>
-            </li>
-            <li>
                 <a href="#" class="itemopt enabled"><i class="fa fa-envelope-o"></i> View on Hummingbird</a>
             </li>
             <li>
@@ -85,7 +64,7 @@
         <div class="row">
             <div class="col-sm-7">
                 <div class="row filemanager">
-                    <div class="thmb" style="width: 795px;">
+                    <div class="thmb" style="width: 795px; left: 10px;">
                         <span class="image featured">
 
 
@@ -104,12 +83,12 @@
     $nextep = $_GET["ep"]+1;
     $previousep = $_GET["ep"]-1;
     if($_GET["ep"] == $anime["episode-count"]){
-        echo '<button class="btn btn-default btn-lg"><a href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $previousep .'">< Previous Episode</a></button>';
+        echo '<button class="btn btn-default btn-lg"><a style="text-decoration: none;" href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $previousep .'">< Previous Episode</a></button>';
     }
     elseif($_GET["ep"] < $anime["episode-count"] && $_GET["ep"] > 1){
-        echo '<button class="btn btn-default btn-lg"><a href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $previousep .'">< Previous Episode</a></button>&nbsp;<button class="btn btn-default btn-lg"><a href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $nextep .'">Next Episode ></a></button>';
+        echo '<button class="btn btn-default btn-lg"><a style="text-decoration: none;" href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $previousep .'">< Previous Episode</a></button>&nbsp;<button class="btn btn-default btn-lg"><a style="text-decoration: none;" href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $nextep .'">Next Episode ></a></button>';
     }
-    else echo '<button class="btn btn-default btn-lg"><a href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $nextep .'">Next Episode ></a></button>';
+    else echo '<button class="btn btn-default btn-lg"><a style="text-decoration: none;" href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $nextep .'">Next Episode ></a></button>';
     ?>
 
 </p>
@@ -138,8 +117,7 @@
 
             $.post('/core/add-task.php', { task_id: id }, function() {
 
-                current_element.parent().fadeOut("fast", function() { $(this).remove(); });
-                //$(data).appendTo('.task-list ul').hide().fadeIn();
+                current_element.parent().text('<li><a class="itemopt enabled "><i class="fa fa-list"></i> Done</a> </li>')
             });
         });
     }

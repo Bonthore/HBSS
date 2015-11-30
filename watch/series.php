@@ -32,22 +32,16 @@
 
             <ul class="filemanager-options">
                 <li>
-                    <div class="ckbox ckbox-default">
-                        <input type="checkbox" id="selectall" value="1" />
-                        <label for="selectall">Completed </label>
-                    </div>
+                    <a href="#" class="itemopt"><i class="fa fa-envelope-o"></i> View on Hummingbird</a>
                 </li>
                 <li>
-                    <a href="#" class="itemopt disabled"><i class="fa fa-envelope-o"></i> View on Hummingbird</a>
+                    <a href="#" class="itemopt"><i class="fa fa-download"></i> Download</a>
                 </li>
                 <li>
-                    <a href="#" class="itemopt disabled"><i class="fa fa-download"></i> Download</a>
+                    <a href="#" class="itemopt"><i class="fa fa-pencil"></i> Request Edit</a>
                 </li>
                 <li>
-                    <a href="#" class="itemopt disabled"><i class="fa fa-pencil"></i> Request Edit</a>
-                </li>
-                <li>
-                    <a href="#" class="itemopt disabled"><i class="fa fa-trash-o"></i> Missing Episodes?</a>
+                    <a href="#" class="itemopt"><i class="fa fa-trash-o"></i> Missing Episodes?</a>
                 </li>
 
             </ul>
@@ -56,7 +50,15 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="row filemanager">
-
+                        <div class="table-responsive" style="padding-right: 20px; padding-left: 10px;">
+                            <table class="table table-hover mb30">
+                                <thead>
+                                <tr>
+                                    <th>Episode Number</th>
+                                    <th>Air Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
                         <?php
                         if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
@@ -72,40 +74,17 @@
                                 $var = "$id-$ep";
                                 ?>
 
-
-
-                                <div class="col-xs-6 col-sm-4 col-md-3 image">
-                                    <div class="thmb">
-                                        <div class="ckbox ckbox-default">
-                                            <input type="checkbox" id="check2" value="1" />
-                                            <label for="check2"></label>
-                                        </div>
-                                        <div class="btn-group fm-group">
-                                            <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu fm-menu" role="menu">
-                                                <li><a href="#"><i class="delete-button fa fa-share"></i> Add to Playlist</a></li>
-                                                <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
-                                                <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-                                                <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
-                                                <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                            </ul>
-                                        </div><!-- btn-group -->
-                                        <div class="thmb-prev">
-                                            <a href="watch.php?id=<?php echo $row["id"] ."&ep=" .$i; ?>" data-rel="prettyPhoto">
-                                                <img src="/assets/images/photos/media1.jpg" class="img-responsive" alt="" />
-                                            </a>
-                                        </div>
-                                        <h5 class="fm-title"><a href="watch.php?id=<?php echo $row["id"] ."&ep=" .$i; ?>"><?php echo $row["title-eng"] ." episode ". $i; ?></a></h5>
-                                        <small class="text-muted">Added: Jan 02, 2014</small>
-                                    </div><!-- thmb -->
-                                </div><!-- col-xs-6 -->
-
+                                        <tr>
+                                            <td><a href="watch.php?id=<?php echo $row["id"] ."&ep=" .$i; ?>"><?php echo $row["title-eng"] ." episode ". $i; ?></a></td>
+                                            <td>Null</td>
+                                        </tr>
 
 
                             <?php }}; ?>
 
+                                </tbody>
+                            </table>
+                        </div>
 
 
                     </div><!-- btn-group -->
@@ -127,22 +106,6 @@
                             <?php if($anime["status"] == "Finished Airing"){?>
                                 <li><i class="fa fa-folder-o"></i> Finished Airing: <?php echo $anime["finished-airing"]; ?></li>
                             <?php }?>
-                        </ul>
-
-                        <div class="mb30"></div>
-
-                        <h5 class="subtitle">Tags</h5>
-                        <ul class="tag-list">
-                            <li><a href="#">Animation</a></li>
-                            <li><a href="#">Design</a></li>
-                            <li><a href="#">Trailer</a></li>
-                            <li><a href="#">Short Film</a></li>
-                            <li><a href="#">Dubstep</a></li>
-                            <li><a href="#">Soundtrack</a></li>
-                            <li><a href="#">Photography</a></li>
-                            <li><a href="#">Macro</a></li>
-                            <li><a href="#">Tuturials</a></li>
-                            <li><a href="#">Documentation</a></li>
                         </ul>
                     </div>
                 </div>
