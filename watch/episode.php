@@ -99,7 +99,20 @@
                             </div>
 <div>Current Time : <span id="currentTime">2.381</span></div>
 <div>Total time : <span id="totalTime">52.209</span></div>
+<p style="text-align: center;">
+    <?php
+    $nextep = $_GET["ep"]+1;
+    $previousep = $_GET["ep"]-1;
+    if($_GET["ep"] == $anime["episode-count"]){
+        echo '<button class="btn btn-default btn-lg"><a href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $previousep .'">< Previous Episode</a></button>';
+    }
+    elseif($_GET["ep"] < $anime["episode-count"] && $_GET["ep"] > 1){
+        echo '<button class="btn btn-default btn-lg"><a href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $previousep .'">< Previous Episode</a></button>&nbsp;<button class="btn btn-default btn-lg"><a href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $nextep .'">Next Episode ></a></button>';
+    }
+    else echo '<button class="btn btn-default btn-lg"><a href="/watch/watch.php?id='. $_GET["id"] .'&ep='. $nextep .'">Next Episode ></a></button>';
+    ?>
 
+</p>
 
                         </span>
                     </div><!-- thmb -->
