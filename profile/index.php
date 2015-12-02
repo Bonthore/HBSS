@@ -21,7 +21,7 @@ function mintuesToTime($minutes) {
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png">
-    <title>Bracket Responsive Bootstrap3 Admin</title>
+    <title>HBSS | Profile</title>
     <link href="/assets/css/style.default.css" rel="stylesheet">
     <link href="/assets/css/prettyPhoto.css" rel="stylesheet">
     <link href="/assets/css/jquery.datatables.css" rel="stylesheet">
@@ -33,9 +33,12 @@ function mintuesToTime($minutes) {
     <style id="/assets/holderjs-style" type="text/css">.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}</style>
     <link href="/assets/css/perfect-scrollbar.css" rel="stylesheet">
     <style>
-        .profile-position > a > img{
-            width: 500px;
-        }
+	.hbcomment > p > a > img{
+		width: 500px;
+	}
+    .profile-position > a > img{
+        width: 500px;
+    }
     </style>
 </head>
 <body style="overflow: visible;">
@@ -115,11 +118,13 @@ function mintuesToTime($minutes) {
                                     <div class="media-body act-media-body">
                                         <strong>You</strong> Commented<br>
                                         <small class="text-muted">Today at 3:18pm</small>
-                                        <div class="media blog-media">
+                                        <div class="media blog-media hbcomment">
+										<p>
                                             <?php
                                               //echo total, use total-1 in loop
                                             $num = count($feed[$i]["substories"])
                                             ?>
+											</p>
                                             <p>
                                                 <?php
                                                 $totalstories = $num-1;

@@ -29,7 +29,7 @@ function mintuesToTime($minutes) {
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png">
-    <title>Bracket Responsive Bootstrap3 Admin</title>
+    <title>HBSS | User</title>
     <link href="/assets/css/style.default.css" rel="stylesheet">
     <link href="/assets/css/prettyPhoto.css" rel="stylesheet">
     <link href="/assets/css/jquery.datatables.css" rel="stylesheet">

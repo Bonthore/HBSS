@@ -10,7 +10,7 @@ include "../core/core.php";
     <meta name="author" content="">
     <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/png">
 
-    <title>Bracket Responsive Bootstrap3 Admin</title>
+    <title>HBSS | Settings</title>
 
     <link rel="stylesheet" href="../assets/css/style.default.css" />
 

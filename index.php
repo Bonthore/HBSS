@@ -21,7 +21,7 @@ function mintuesToTime($minutes) {
   <meta name="author" content="">
   <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png">
 
-  <title>Bracket Responsive Bootstrap3 Admin</title>
+  <title>HBSS | Dashboard</title>
 
   <link href="/assets/css/style.default.css" rel="stylesheet">
   <link href="/assets/css/jquery.datatables.css" rel="stylesheet">
@@ -55,7 +55,6 @@ function mintuesToTime($minutes) {
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
-          <li><a href="index.html">Bracket</a></li>
           <li class="active">Dashboard</li>
         </ol>
       </div>

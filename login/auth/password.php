@@ -27,7 +27,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     <meta name="author" content="">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png">
 
-    <title>Bracket Responsive Bootstrap3 Admin</title>
+    <title>HBSS | Login</title>
 
     <link href="/assets/css/style.default.css" rel="stylesheet">
 

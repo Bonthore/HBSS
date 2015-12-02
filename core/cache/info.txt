@@ -1,0 +1,1 @@
+This folder is for your cached json from the hummingbird API, It is required for the application to work.
