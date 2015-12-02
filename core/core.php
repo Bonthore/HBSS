@@ -1,12 +1,12 @@
 <?php
 session_start();
+include "mysql.php";
 include "apicache.php";
 if (!isset ($_SESSION["session"])){
     $url =  "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     $escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
     header( 'Location: /login?previous='. $escaped_url );
 }
-$conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }

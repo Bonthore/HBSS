@@ -106,7 +106,6 @@ else $search = "";
 
                             <div class="results-list">
 <?php
-$conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
 $query = "SELECT * FROM `anime` WHERE `id` LIKE '%". $_GET["q"] ."%' OR `title-eng` LIKE '%%". $_GET["q"] ."%' OR `synopsis` LIKE '%%". $_GET["q"] ."%' OR `started-airing` LIKE '%%". $_GET["q"] ."%' OR `finished-airing` LIKE '%%". $_GET["q"] ."%'";
 $result = mysqli_query($conn, $query);
 var_dump($result); ?>

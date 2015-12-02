@@ -1,6 +1,5 @@
 <?php
 include "core.php";
-$conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
 $query = "SELECT playlist FROM users where id='". $user["id"] ."'";
 $result = mysqli_query($conn, $query);
 while ($row = mysqli_fetch_array($result)) {

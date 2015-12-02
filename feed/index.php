@@ -48,9 +48,8 @@ include "../core/core.php";
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
-          <li><a href="index.html">Bracket</a></li>
-          <li><a href="index.html">Pages</a></li>
-          <li class="active">Timeline</li>
+          <li><a href="index.html">Dashboard</a></li>
+          <li class="active">Feed</li>
         </ol>
       </div>
     </div>
