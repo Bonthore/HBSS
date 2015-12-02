@@ -1,0 +1,10 @@
+{
+  "name": "HBSS",
+  "scripts": {
+  },
+  "env": {
+  },
+  "addons": [
+    "jawsdb"
+  ]
+}
