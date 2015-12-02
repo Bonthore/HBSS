@@ -66,8 +66,6 @@
                 <div class="row filemanager">
                     <div class="thmb" style="width: 795px; left: 10px;">
                         <span class="image featured">
-
-
                             <div id="video_container">
                                 <video poster="http://media.w3.org/2010/05/sintel/poster.png" preload="none" controls="" id="video" tabindex="0" width="770">
                                     <source type="video/mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" id="mp4">
@@ -116,8 +114,7 @@
             var id = $(this).attr('id');
 
             $.post('/core/add-task.php', { task_id: id }, function() {
-
-                current_element.parent().text('<li><a class="itemopt enabled "><i class="fa fa-list"></i> Done</a> </li>')
+                current_element.parent().html('<a class="itemopt enabled "><i class="fa fa-list"></i> Done</a> ')
             });
         });
     }

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "apicache.php";
 if (!isset ($_SESSION["session"])){
     $url =  "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     $escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );

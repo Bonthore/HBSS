@@ -37,4 +37,4 @@ else{
     $_POST["success_auth"] = "true";
 }
 curl_close($curl);
-header("location: /settings");
+header("location: /settings?action=add&success=true");

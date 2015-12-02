@@ -34,6 +34,21 @@ include "../core/core.php";
 <!-- Preloader -->
 
 <section>
+    <?php
+    if(isset($_GET["action"]) && $_GET["action"]== "remove" && isset($_GET["success"]) && $_GET["success"]== "true") {
+    ?>
+        <div class="alert alert-success" style="
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    z-index: 1000;
+">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <strong>Done!</strong> We successfully removed your authentication key.
+        </div>
+        <?php
+    }
+    elseif(isset($_GET["action"]) && $_GET["action"]== "add" && isset($_GET["success"]) && $_GET["success"]== "true"){?>
     <div class="alert alert-success" style="
     position: fixed;
     top: 60px;
@@ -41,8 +56,9 @@ include "../core/core.php";
     z-index: 1000;
 ">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <strong>Well done!</strong> You successfully read this <a href="#" class="alert-link">important alert message</a>.
+        <strong>Done!</strong> We successfully added your authentication key.
     </div>
+    <?php } ?>
     <?php include "../core/leftpanel.php"; ?>
 
     <div class="mainpanel">
@@ -50,13 +66,12 @@ include "../core/core.php";
         <?php include "../core/header.php"; ?>
 
         <div class="pageheader">
-            <h2><i class="fa fa-edit"></i> Account Settings <span>Here, you can change your settings and authenticate your account.</span></h2>
+            <h2><i class="fa fa-cog"></i> Account Settings <span>Here, you can change your settings and authenticate your account.</span></h2>
             <div class="breadcrumb-wrapper">
                 <span class="label">You are here:</span>
                 <ol class="breadcrumb">
-                    <li><a href="index.html">Bracket</a></li>
-                    <li><a href="general-forms.html">Forms</a></li>
-                    <li class="active">General Forms</li>
+                    <li><a href="/">Dashboard</a></li>
+                    <li class="active">Settings</li>
                 </ol>
             </div>
         </div>
@@ -66,7 +81,6 @@ include "../core/core.php";
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-btns">
-                        <a href="#" class="panel-close">&times;</a>
                         <a href="#" class="minimize">&minus;</a>
                     </div>
                     <h4 class="panel-title">Authenticate with hummingbird.</h4>
@@ -112,15 +126,21 @@ include "../core/core.php";
             </div>
             <div class="panel-body panel-body-nopadding">
 
-            <form class="form-horizontal form-bordered">
+            <form action="removeauthkey.php" class="form-horizontal form-bordered">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="disabledinput">Key:</label>
                                 <div class="col-sm-6">
                                     <input type="text" value="<?php echo mb_strimwidth($user["authkey"], 1, 60, "..."); ?>" id="readonlyinput" class="form-control" readonly="readonly" /></div>
                             </div>
-                </form>
-
             </div><!-- panel-body -->
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <button class="btn btn-danger" type="submit">Remove</button>
+                    </div>
+                </div>
+            </div><!-- panel-footer -->
+            </form>
                             <?php
                         }
                         ?>
@@ -128,12 +148,11 @@ include "../core/core.php";
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-btns">
-                    <a href="#" class="panel-close">&times;</a>
                     <a href="#" class="minimize">&minus;</a>
                 </div>
-                <h4 class="panel-title">Authenticate with hummingbird.</h4>
+                <h4 class="panel-title">Change Your Settings.</h4>
 
-                <p>Input your humminbird password to retrieve your authentication key, this is required for some features such as library updates.</p>
+                <p>Here you can change your Hummingbird account settings.</p>
             </div>
             <div class="panel-body panel-body-nopadding">
 
@@ -142,31 +161,46 @@ include "../core/core.php";
                     <div class="form-group">
                         <label class="col-sm-3 control-label">About:</label>
                         <div class="col-sm-6">
-                            <input type="text" placeholder="<?php echo $user["about"]; ?>" class="form-control">
+                            <input type="text" placeholder="<?php echo $user["about"]; ?>" value="<?php echo $user["about"]; ?>" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Bio:</label>
                         <div class="col-sm-6">
-                            <input type="text" placeholder="<?php echo $user["bio"]; ?>" class="form-control">
+                            <input type="text" placeholder="<?php echo $user["bio"]; ?>" value="<?php echo $user["bio"]; ?>" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Show NSFW content:</label>
                         <div class="col-sm-6">
-                            <input type="text" placeholder="<?php echo $user["show_adult_content"]; ?>" class="form-control">
+                            <select id="fruits" class="form-control" required="">
+                                <?php
+                                if($user["show_adult_content"]==1){
+                                    ?>
+                                    <option value="1">True</option>
+                                    <option value="0">False</option>
+                                <?php
+                                }
+                                elseif ($user["show_adult_content"]==0){
+                                    ?>
+                                    <option value="0">False</option>
+                                    <option value="1">True</option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Title Lang Pref:</label>
                         <div class="col-sm-6">
-                            <input type="text" placeholder="<?php echo $user["title_language_preference"]; ?>" class="form-control">
+                            <input type="text" placeholder="<?php echo $user["title_language_preference"]; ?>" value="<?php echo $user["title_language_preference"]; ?>" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Manual playlist:</label>
                         <div class="col-sm-6">
-                            <input type="text" placeholder="<?php echo $user["playlist"]; ?>" class="form-control">
+                            <input type="text" placeholder="<?php echo $user["playlist"]; ?>" value="<?php echo $user["playlist"]; ?>" class="form-control">
                         </div>
                     </div>
 
@@ -198,294 +232,7 @@ include "../core/core.php";
         </div><!-- contentpanel -->
     </div><!-- mainpanel -->
 
-    <div class="rightpanel">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
-            <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
-            <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
-            <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active" id="rp-alluser">
-                <h5 class="sidebartitle">Online Users</h5>
-                <ul class="chatuserlist">
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/userprofile.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Los Angeles, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user1.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <span class="pull-right badge badge-danger">2</span>
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>San Francisco, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user2.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Bangkok, Thailand</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user3.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                </ul>
-
-                <div class="mb30"></div>
-
-                <h5 class="sidebartitle">Offline Users</h5>
-                <ul class="chatuserlist">
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user5.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Los Angeles, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user2.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>San Francisco, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user3.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Bangkok, Thailand</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user5.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user5.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane" id="rp-favorites">
-                <h5 class="sidebartitle">Favorites</h5>
-                <ul class="chatuserlist">
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user2.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Los Angeles, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user1.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>San Francisco, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user3.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Bangkok, Thailand</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user5.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane" id="rp-history">
-                <h5 class="sidebartitle">History</h5>
-                <ul class="chatuserlist">
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Hi hello, ctc?... would you mind if I go to your...</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user2.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>This is to inform you that your product that we...</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="images/photos/user3.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Are you willing to have a long term relat...</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane pane-settings" id="rp-settings">
-
-                <h5 class="sidebartitle mb20">Settings</h5>
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Show Offline Users</label>
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle toggle-success"></div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Enable History</label>
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle toggle-success"></div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Show Full Name</label>
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle-chat1 toggle-success"></div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Show Location</label>
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle toggle-success"></div>
-                    </div>
-                </div>
-
-            </div><!-- tab-pane -->
-
-        </div><!-- tab-content -->
-    </div><!-- rightpanel -->
+<?php include "../core/rightpanel.php" ?>
 
 </section>
 

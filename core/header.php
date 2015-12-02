@@ -1,8 +1,8 @@
 <script src="../assets/js/jquery-1.10.2.min.js"></script>
 <div class="headerbar">
     <a class="menutoggle"><i class="fa fa-bars"></i></a>
-    <form class="searchform" action="http://themepixels.com/demo/webpage/bracket/index.html" method="post">
-        <input type="text" class="form-control" name="keyword" placeholder="Search here...">
+    <form class="searchform" action="/search" method="get">
+        <input type="text" class="form-control" name="q" placeholder="Search here...">
     </form><div class="header-right"><!-- Music player here. -->
         <ul class="headermenu">
             <li>
@@ -52,7 +52,7 @@
             <li>
                 <div class="btn-group">
                     <button class="btn btn-default dropdown-toggle tp-icon" data-toggle="dropdown">
-                        <i class="glyphicon glyphicon-globe"></i>
+                        <i class="fa fa-h-square"></i>
                         <span class="badge">5</span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-head pull-right">

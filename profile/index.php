@@ -27,12 +27,16 @@ function mintuesToTime($minutes) {
     <link href="/assets/css/jquery.datatables.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    <script src="/assets/js/html5shiv.js"></script>
     <![endif]-->
     <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style>
     <style id="/assets/holderjs-style" type="text/css">.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}</style>
     <link href="/assets/css/perfect-scrollbar.css" rel="stylesheet">
+    <style>
+        .profile-position > a > img{
+            width: 500px;
+        }
+    </style>
 </head>
 <body style="overflow: visible;">
 <!-- Preloader -->
@@ -99,8 +103,7 @@ function mintuesToTime($minutes) {
                     <div class="tab-content">
                         <div class="tab-pane active" id="activities">
                         <?php
-                        $json = file_get_contents("http://hummingbird.me/api/v1/users/". $user["name"] ."/feed");
-                        $feed = json_decode($json, true);
+                        $feed = json_decode(getJson("http://hummingbird.me/api/v1/users/". $user["name"] ."/feed"), true);
                         $i=0;
                         while ($i<count($feed)){
                             if ($feed[$i]["story_type"] == "comment"){
@@ -208,8 +211,7 @@ function mintuesToTime($minutes) {
 
 
                                 <?php
-                                $json = file_get_contents("https://hummingbird.me/users?followers_of=". $user["name"]);
-                                $followers = json_decode($json, true);
+                                $followers = json_decode(getJson("https://hummingbird.me/users?followers_of=". $user["name"]), true);
                                 $i=0;
                                 while ($i<count($followers["users"])){
                                     ?>
@@ -217,8 +219,8 @@ function mintuesToTime($minutes) {
 
                                     <div class="media">
                                         <a class="pull-left" href="#">
-                                            <?php $json = file_get_contents("http://hummingbird.me/api/v1/users/". $followers["users"][$i]["id"]);
-                                            $hbuser = json_decode($json, true);?>
+                                            <?php
+                                            $hbuser = json_decode(getJson("http://hummingbird.me/api/v1/users/". $followers["users"][$i]["id"]), true);?>
                                             <img class="media-object" src="<?php echo $hbuser["avatar"] ?>" alt="">
                                         </a>
                                         <div class="media-body">
@@ -227,9 +229,18 @@ function mintuesToTime($minutes) {
                                             <div class="profile-waifu"><i class="fa fa-heart"></i> <?php echo $followers["users"][$i]["waifu"];?></div>
                                             <div class="profile-position"><i class="fa fa-briefcase"></i> <?php echo $followers["users"][$i]["about_formatted"];?></div>
                                             <div class="mb20"></div>
-                                            <button class="btn btn-sm btn-success mr5"><i class="fa fa-user"></i></button>test.
+                                            <?php if($followers["users"][$i]["is_followed"]=="true"){
 
-
+                                                ?>
+                                                <button class="btn btn-sm btn-primary mr5"><i class="fa fa-check"></i> Following</button>
+                                            <?php
+                                            }
+                                            else{
+                                                ?>
+                                                <button class="btn btn-sm btn-success mr5"><i class="fa fa-user"></i> Follow</button>
+                                            <?php
+                                            }
+                                            ?>
                                             <button class="btn btn-sm btn-white"><i class="fa fa-envelope-o"></i> Message</button>
                                         </div>
                                     </div>
@@ -244,8 +255,7 @@ function mintuesToTime($minutes) {
                         <div class="tab-pane" id="following">
                             <div class="activity-list" style="color: #333;">
                                 <?php
-                                $json = file_get_contents("http://hummingbird.me/users?followed_by=". $user["name"]);
-                                $following = json_decode($json, true);
+                                $following = json_decode(getJson("http://hummingbird.me/users?followed_by=". $user["name"]), true);
                                 $i=0;
                                 while ($i<count($following["users"])){
                                     ?>
@@ -253,8 +263,9 @@ function mintuesToTime($minutes) {
 
                                     <div class="media">
                                         <a class="pull-left" href="#">
-                                            <?php $json = file_get_contents("http://hummingbird.me/api/v1/users/". $following["users"][$i]["id"]);
-                                            $hbuser = json_decode($json, true);?>
+                                            <?php
+                                            $hbuser = json_decode(getJson("http://hummingbird.me/api/v1/users/". $following["users"][$i]["id"]), true);
+                                            ?>
                                             <img class="media-object" src="<?php echo $hbuser["avatar"] ?>" alt="">
                                         </a>
                                         <div class="media-body">
@@ -297,8 +308,7 @@ function mintuesToTime($minutes) {
                                                         </thead>
                                                         <tbody role="alert" aria-live="polite" aria-relevant="all">
                                                         <?php
-                                                        $json = file_get_contents("http://hummingbird.me/api/v1/users/". $user["name"] ."/library");
-                                                        $library = json_decode($json, true);
+                                                        $library = json_decode(getJson("http://hummingbird.me/api/v1/users/". $user["name"] ."/library"), true);
                                                         $i=0;
                                                         while ($i<count($library)){
                                                         $query = "SELECT * FROM anime WHERE id='" . $library[$i]["anime"]["id"] . "' LIMIT 1";
@@ -342,340 +352,7 @@ function mintuesToTime($minutes) {
         <!-- contentpanel -->
     </div>
     <!-- mainpanel -->
-    <div class="rightpanel">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
-            <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
-            <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
-            <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active" id="rp-alluser">
-                <h5 class="sidebartitle">Online Users</h5>
-                <ul class="chatuserlist">
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/userprofile.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Los Angeles, CA</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user1.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <span class="pull-right badge badge-danger">2</span>
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>San Francisco, CA</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user2.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Bangkok, Thailand</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user3.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                </ul>
-                <div class="mb30"></div>
-                <h5 class="sidebartitle">Offline Users</h5>
-                <ul class="chatuserlist">
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user5.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Los Angeles, CA</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user2.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>San Francisco, CA</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user3.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Bangkok, Thailand</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user5.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user5.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane" id="rp-favorites">
-                <h5 class="sidebartitle">Favorites</h5>
-                <ul class="chatuserlist">
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user2.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Los Angeles, CA</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user1.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>San Francisco, CA</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user3.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Bangkok, Thailand</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user5.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane" id="rp-history">
-                <h5 class="sidebartitle">History</h5>
-                <ul class="chatuserlist">
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user4.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Hi hello, ctc?... would you mind if I go to your...</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user2.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>This is to inform you that your product that we...</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="/assets/images/photos/user3.png" class="media-object">
-                            </a>
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Are you willing to have a long term relat...</small>
-                            </div>
-                        </div>
-                        <!-- media -->
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane pane-settings" id="rp-settings">
-                <h5 class="sidebartitle mb20">Settings</h5>
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Show Offline Users</label>
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle toggle-success" style="height: 20px; width: 50px;">
-                            <div class="toggle-slide active">
-                                <div class="toggle-inner" style="width: 80px; margin-left: 0px;">
-                                    <div class="toggle-on active" style="height: 20px; width: 40px; text-align: center; text-indent: -10px; line-height: 20px;">ON</div>
-                                    <div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div>
-                                    <div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-align: center; text-indent: 10px; line-height: 20px;">OFF</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Enable History</label>
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle toggle-success" style="height: 20px; width: 50px;">
-                            <div class="toggle-slide active">
-                                <div class="toggle-inner" style="width: 80px; margin-left: 0px;">
-                                    <div class="toggle-on active" style="height: 20px; width: 40px; text-align: center; text-indent: -10px; line-height: 20px;">ON</div>
-                                    <div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div>
-                                    <div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-align: center; text-indent: 10px; line-height: 20px;">OFF</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Show Full Name</label>
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle-chat1 toggle-success" style="height: 20px; width: 50px;">
-                            <div class="toggle-slide">
-                                <div class="toggle-inner" style="width: 80px; margin-left: -30px;">
-                                    <div class="toggle-on" style="height: 20px; width: 40px; text-align: center; text-indent: -10px; line-height: 20px;">ON</div>
-                                    <div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div>
-                                    <div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-align: center; text-indent: 10px; line-height: 20px;">OFF</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Show Location</label>
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle toggle-success" style="height: 20px; width: 50px;">
-                            <div class="toggle-slide active">
-                                <div class="toggle-inner" style="width: 80px; margin-left: 0px;">
-                                    <div class="toggle-on active" style="height: 20px; width: 40px; text-align: center; text-indent: -10px; line-height: 20px;">ON</div>
-                                    <div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div>
-                                    <div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-align: center; text-indent: 10px; line-height: 20px;">OFF</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- tab-pane -->
-        </div>
-        <!-- tab-content -->
-    </div>
-    <!-- rightpanel -->
+    <?php include "../core/rightpanel.php" ?>
 </section>
 <script src="/assets/js/jquery-1.10.2.min.js"></script>
 <script src="/assets/js/jquery-migrate-1.2.1.min.js"></script>
@@ -739,4 +416,4 @@ function mintuesToTime($minutes) {
     });
 </script>
 </body>
-</html>
+</html>                         
