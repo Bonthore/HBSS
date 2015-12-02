@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "/core/mysql.php";
+include "mysql.php";
 if (isset ($_GET["previous"]) && !empty($_GET["previous"])){
     $location=$_GET["previous"];
     $url_full= "?previous=". $location;
