@@ -18,7 +18,6 @@ $series = explode(",",$user["playlist"]);
                         <div class="panel-body">
                             <ul>
                                 <?php
-                                $conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
                                 $query = "SELECT playlist FROM users where id='". $user["id"] ."'";
                                 $result = mysqli_query($conn, $query);
                                 $numrows = mysqli_num_rows($result);

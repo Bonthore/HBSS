@@ -31,7 +31,6 @@ else{
         'cost' => 12
     ];
     $hash = password_hash($_POST["password"], PASSWORD_DEFAULT, $options);
-    $conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
     $query = "UPDATE `users` SET `authkey` = '". $json_response ."', `authenticated` = 'true', `password` = '". $hash ."' WHERE id = '". $user["id"] ."'";
     $result = mysqli_query($conn, $query);
     $_POST["success_auth"] = "true";

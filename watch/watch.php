@@ -1,6 +1,5 @@
 <?php
 include "../core/core.php";
-$link = @mysqli_connect('localhost', 'root', 'root', 'anime');
 ?>
 <!DOCTYPE html>
 <html style="overflow: scroll;">

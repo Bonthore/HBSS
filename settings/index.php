@@ -87,7 +87,6 @@ include "../core/core.php";
 
 
                         <?php
-                        $conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
                         $query = "SELECT `authkey` FROM `users` WHERE id = '". $user["id"] ."'";
                         $result = mysqli_query($conn, $query);
                         $row = mysqli_fetch_array($result);

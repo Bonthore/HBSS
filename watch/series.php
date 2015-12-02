@@ -63,9 +63,8 @@
                         <?php
                         if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
                         $start_from = ($page-1) * 20;
-                        $link = @mysqli_connect('localhost', 'root', 'root', 'anime');
                         $query = "SELECT * FROM `anime` WHERE id = ". $_GET["id"] ." ORDER BY `title-eng` LIMIT $start_from, 20";
-                        $result = mysqli_query($link, $query);
+                        $result = mysqli_query($conn, $query);
                         while ($row = mysqli_fetch_array($result)) {
                             $i=0;
                             for( $i = 1; $i <= $row["episode-count"]; $i++ ) {

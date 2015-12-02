@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "/core/mysql.php";
 if (isset ($_GET["previous"]) && !empty($_GET["previous"])){
     $location=$_GET["previous"];
     $url_full= "?previous=". $location;
@@ -19,7 +20,6 @@ if(isset($_SESSION['session']))
 $uid = uniqid();
 //$_POST["name"] set
 if(isset($_POST["name"]) && !empty($_POST["name"])) {
-    $conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
     $query = "SELECT * FROM users WHERE name='" . $_POST["name"] . "' LIMIT 1";
     $result = mysqli_query($conn, $query);
     //check if user exists in db
