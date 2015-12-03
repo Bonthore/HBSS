@@ -165,14 +165,16 @@ include $_SERVER["DOCUMENT_ROOT"] ."/core/core.php";
                               <a href="#"><img src="<?php echo $row["cover-image"]; ?>" class="img-responsive" style="height: 300px;" alt=""></a>
                               <div class="timeline-btns">
                                   <div class="pull-left">
-                                      <p>You <?php//add while loop
+                                      <p>You
+                                          <?php
                                           if ($feed[$i]["substories"][0]["new_status"] == "completed"){echo "Completed";}
                                           elseif ($feed[$i]["substories"][0]["new_status"] == "currently_watching"){echo "are Currently Watching";}
                                           elseif ($feed[$i]["substories"][0]["new_status"] == "plan_to_watch"){echo "Plan To Watch";}
                                           elseif ($feed[$i]["substories"][0]["new_status"] == "on_hold"){echo "Put On Hold";}
                                           elseif ($feed[$i]["substories"][0]["new_status"] == "dropped"){echo "Dropped";}
                                           else echo $feed[$i]["substories"][0]["new_status"];
-                                          ?> <a href="/watch/watch.php?id=<?php echo $row["id"]; ?>"><?php echo $row["title-eng"]; ?></a>.</p>
+                                          ?>
+                                          <a href="/watch/watch.php?id=<?php echo $row["id"]; ?>"><?php echo $row["title-eng"]; ?></a>.</p>
                                   </div>
                               </div>
                           </div>

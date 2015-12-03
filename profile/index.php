@@ -10,7 +10,7 @@ function mintuesToTime($minutes) {
 //
 // Then you can output it like so...
 //
-    echo "{$d}d {$h}h {$m}m";;
+    echo "{$d}d {$h}h {$m}m";
 }
 
 ?>
@@ -155,14 +155,16 @@ function mintuesToTime($minutes) {
                                         <img class="media-object act-thumb"  height="100" src="<?php echo $feed[$i]["user"]["avatar"]; ?>" alt="">
                                     </a>
                                     <div class="media-body act-media-body">
-                                        <strong>You</strong> <?php//add while loop
+                                        <strong>You</strong>
+                                        <?php
                                         if ($feed[$i]["substories"][0]["new_status"] == "completed"){echo "Completed";}
                                         elseif ($feed[$i]["substories"][0]["new_status"] == "currently_watching"){echo "are Currently Watching";}
                                         elseif ($feed[$i]["substories"][0]["new_status"] == "plan_to_watch"){echo "Plan To Watch";}
                                         elseif ($feed[$i]["substories"][0]["new_status"] == "on_hold"){echo "Put On Hold";}
                                         elseif ($feed[$i]["substories"][0]["new_status"] == "dropped"){echo "Dropped";}
                                         else echo $feed[$i]["substories"][0]["new_status"];
-                                        ?> <a href="/watch/watch.php?id=<?php echo $row["id"]; ?>"><?php echo $row["title-eng"]; ?></a>. <br>
+                                        ?>
+                                        <a href="/watch/watch.php?id=<?php echo $row["id"]; ?>"><?php echo $row["title-eng"]; ?></a>. <br>
                                         <small class="text-muted">Today at 3:18pm</small>
                                         <div class="media blog-media">
                                             <a class="pull-left" href="/watch/watch.php?id=<?php echo $row["id"]; ?>">
