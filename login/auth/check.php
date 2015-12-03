@@ -6,7 +6,6 @@ if (isset ($_GET["previous"]) && !empty($_GET["previous"])){
 }
 else $location="/";
 $uid = uniqid();
-
 $query = "SELECT * FROM users WHERE name='" . $_SESSION['post_data'] . "' LIMIT 1";
 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 while ($row = mysqli_fetch_array($result)) {
