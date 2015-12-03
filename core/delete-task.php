@@ -1,5 +1,5 @@
 <?php
-include "core.php";
+include $_SERVER["DOCUMENT_ROOT"] ."/core/core.php";
 $plistid = $_POST['task_id'];
 $query = "SELECT playlist FROM users where id='". $user["id"] ."'";
 $result = mysqli_query($conn, $query);

@@ -1,5 +1,5 @@
 <?php
-include "../core/core.php";
+include $_SERVER["DOCUMENT_ROOT"] ."/core/core.php";
 ?>
 <html lang="en" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
 <head>
@@ -15,8 +15,8 @@ include "../core/core.php";
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
-  <script src="js/html5shiv.js"></script>
-  <script src="js/respond.min.js"></script>
+  <script src="/assets/js/html5shiv.js"></script>
+  <script src="/assets/js/respond.min.js"></script>
   <![endif]-->
 <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style>
     <style>
@@ -36,12 +36,12 @@ include "../core/core.php";
 <section>
   
   <!-- leftpanel -->
-  <?php include "../core/leftpanel.php"; ?>
+  <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/leftpanel.php"; ?>
   
   <div class="mainpanel">
     
     <!-- headerbar -->
-          <?php include "../core/header.php"; ?>
+          <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/header.php"; ?>
 
     <div class="pageheader">
       <h2><i class="fa fa-clock-o"></i> Feed <span>Your Feed.</span></h2>
@@ -165,14 +165,16 @@ include "../core/core.php";
                               <a href="#"><img src="<?php echo $row["cover-image"]; ?>" class="img-responsive" style="height: 300px;" alt=""></a>
                               <div class="timeline-btns">
                                   <div class="pull-left">
-                                      <p>You <?php//add while loop
+                                      <p>You
+                                          <?php
                                           if ($feed[$i]["substories"][0]["new_status"] == "completed"){echo "Completed";}
                                           elseif ($feed[$i]["substories"][0]["new_status"] == "currently_watching"){echo "are Currently Watching";}
                                           elseif ($feed[$i]["substories"][0]["new_status"] == "plan_to_watch"){echo "Plan To Watch";}
                                           elseif ($feed[$i]["substories"][0]["new_status"] == "on_hold"){echo "Put On Hold";}
                                           elseif ($feed[$i]["substories"][0]["new_status"] == "dropped"){echo "Dropped";}
                                           else echo $feed[$i]["substories"][0]["new_status"];
-                                          ?> <a href="/watch/watch.php?id=<?php echo $row["id"]; ?>"><?php echo $row["title-eng"]; ?></a>.</p>
+                                          ?>
+                                          <a href="/watch/watch.php?id=<?php echo $row["id"]; ?>"><?php echo $row["title-eng"]; ?></a>.</p>
                                   </div>
                               </div>
                           </div>
@@ -226,7 +228,7 @@ include "../core/core.php";
     
   </div><!-- mainpanel -->
 
-    <?php include "../core/rightpanel.php" ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/rightpanel.php" ?>
   
 </section>
 

@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+include $_SERVER["DOCUMENT_ROOT"] ."/core/mysql.php";
 if (isset ($_GET["previous"]) && !empty($_GET["previous"])){
     $location=$_GET["previous"];
     $url_full= "?previous=". $location;
@@ -9,7 +10,6 @@ else {
     $location="/";
     $url_full="/";
 }
-$conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

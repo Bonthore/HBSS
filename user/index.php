@@ -1,5 +1,5 @@
 <?php
-include "../core/core.php";
+include $_SERVER["DOCUMENT_ROOT"] ."/core/core.php";
 if (isset($_GET["u"])&& !empty($_GET["u"])){
 
 }
@@ -48,11 +48,11 @@ function mintuesToTime($minutes) {
     <div id="status" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
 <section>
-    <?php include "../core/leftpanel.php";
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/leftpanel.php";
     ?>
     <!-- leftpanel -->
     <div class="mainpanel">
-        <?php include "../core/header.php";
+        <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/header.php";
         ?>
         <!-- headerbar -->
         <div class="pageheader">
