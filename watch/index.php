@@ -1,5 +1,5 @@
 <?php
-include "../core/core.php";
+include $_SERVER["DOCUMENT_ROOT"] ."/core/core.php";
 ?>
 <html lang="en" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
 <head>
@@ -26,11 +26,11 @@ include "../core/core.php";
     <div id="status" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
 <section>
-    <?php include "../core/leftpanel.php";
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/leftpanel.php";
     ?>
     <!-- leftpanel -->
     <div class="mainpanel">
-        <?php include "../core/header.php";
+        <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/header.php";
         ?>
         <!-- headerbar -->
         <div class="pageheader">
@@ -95,7 +95,7 @@ include "../core/core.php";
         <!-- contentpanel -->
     </div>
     <!-- mainpanel -->
-    <?php include "../core/rightpanel.php" ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/rightpanel.php" ?>
 </section>
 <script src="/assets/js/jquery-1.10.2.min.js"></script>
 <script src="/assets/js/jquery-migrate-1.2.1.min.js"></script>

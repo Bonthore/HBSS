@@ -1,5 +1,5 @@
 <?php
-include "../core/core.php";
+include $_SERVER["DOCUMENT_ROOT"] ."/core/core.php";
 ?>
 <!DOCTYPE html>
 <html lang="en" style="overflow: scroll;">
@@ -43,7 +43,7 @@ include "../core/core.php";
     right: 10px;
     z-index: 1000;
 ">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">ï¿½</button>
             <strong>Done!</strong> We successfully removed your authentication key.
         </div>
         <?php
@@ -55,15 +55,15 @@ include "../core/core.php";
     right: 10px;
     z-index: 1000;
 ">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">ï¿½</button>
         <strong>Done!</strong> We successfully added your authentication key.
     </div>
     <?php } ?>
-    <?php include "../core/leftpanel.php"; ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/leftpanel.php"; ?>
 
     <div class="mainpanel">
 
-        <?php include "../core/header.php"; ?>
+        <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/header.php"; ?>
 
         <div class="pageheader">
             <h2><i class="fa fa-cog"></i> Account Settings <span>Here, you can change your settings and authenticate your account.</span></h2>
@@ -231,7 +231,7 @@ include "../core/core.php";
         </div><!-- contentpanel -->
     </div><!-- mainpanel -->
 
-<?php include "../core/rightpanel.php" ?>
+<?php include $_SERVER["DOCUMENT_ROOT"] ."/core/rightpanel.php" ?>
 
 </section>
 

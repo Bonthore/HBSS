@@ -21,12 +21,12 @@
 
 <section>
 
-    <?php include "../core/leftpanel.php";
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/leftpanel.php";
     ?>
 
 <div class="mainpanel">
 
-    <?php include "../core/header.php";
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/header.php";
     ?>
 
     <div class="pageheader">
@@ -95,7 +95,7 @@
                     </div><!-- thmb -->
                 </div><!-- btn-group -->
             </div><!-- thmb -->
-            <?php include "../core/playlist.php";?>
+            <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/playlist.php";?>
         </div>
     </div><!-- col-xs-6 -->
 </div><!-- row -->

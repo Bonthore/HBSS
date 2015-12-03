@@ -1,5 +1,5 @@
 <?php
-include "../core/core.php";
+include $_SERVER["DOCUMENT_ROOT"] ."/core/core.php";
 ?>
 <!DOCTYPE html>
 <html style="overflow: scroll;">

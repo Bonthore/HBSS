@@ -1,5 +1,4 @@
 <?php
-$conn = @mysqli_connect('localhost', 'root', 'root', 'anime');
 $series = explode(",",$user["playlist"]);
 ?>
 <section>

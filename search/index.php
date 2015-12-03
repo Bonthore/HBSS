@@ -1,4 +1,4 @@
-<?php include "../core/core.php";
+<?php include $_SERVER["DOCUMENT_ROOT"] ."/core/core.php";
 if(isset($_GET["q"]) && !empty($_GET["q"])){
     $search = $_GET["q"];
 }
@@ -29,11 +29,11 @@ else $search = "";
 <!-- Preloader -->
 <section>
 
-    <?php include "../core/leftpanel.php"; ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/leftpanel.php"; ?>
 
     <div class="mainpanel">
 
-        <?php include "../core/header.php"; ?>
+        <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/header.php"; ?>
 
         <div class="pageheader">
             <h2><i class="fa fa-search"></i> Search Results <span>Subtitle goes here...</span></h2>
@@ -121,7 +121,7 @@ var_dump($result); ?>
 
     </div><!-- mainpanel -->
 
-    <?php include "../core/rightpanel.php" ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/rightpanel.php" ?>
 
 </section>
 

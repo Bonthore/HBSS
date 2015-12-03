@@ -1,5 +1,5 @@
 <?php
-include "../core/core.php";
+include $_SERVER["DOCUMENT_ROOT"] ."/core/core.php";
 function mintuesToTime($minutes) {
 //
 // Assuming that your minutes value is $minutes
@@ -47,11 +47,11 @@ function mintuesToTime($minutes) {
     <div id="status" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
 <section>
-    <?php include "../core/leftpanel.php";
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/leftpanel.php";
     ?>
     <!-- leftpanel -->
     <div class="mainpanel">
-        <?php include "../core/header.php";
+        <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/header.php";
         ?>
         <!-- headerbar -->
         <div class="pageheader">
@@ -357,7 +357,7 @@ function mintuesToTime($minutes) {
         <!-- contentpanel -->
     </div>
     <!-- mainpanel -->
-    <?php include "../core/rightpanel.php" ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] ."/core/rightpanel.php" ?>
 </section>
 <script src="/assets/js/jquery-1.10.2.min.js"></script>
 <script src="/assets/js/jquery-migrate-1.2.1.min.js"></script>
