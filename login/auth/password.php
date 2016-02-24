@@ -1,14 +1,16 @@
 <?php
-
 session_start();
-include $_SERVER["DOCUMENT_ROOT"] ."/core/mysql.php";
+include "../../core/config.php";
+if (!isset ($_SESSION['post_data'])) {
+    header( 'Location: '. $config["root"] .'/login' );
+}
 if (isset ($_GET["previous"]) && !empty($_GET["previous"])){
     $location=$_GET["previous"];
     $url_full= "?previous=". $location;
 }
 else {
-    $location="/";
-    $url_full="/";
+    $location= $config["root"] ."";
+    $url_full= $config["root"] ."";
 }
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -25,11 +27,11 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="<?php echo $config["root"]; ?>/assets/images/favicon.png" type="image/png">
 
     <title>HBSS | Login</title>
 
-    <link href="/assets/css/style.default.css" rel="stylesheet">
+    <link href="<?php echo $config["root"]; ?>/assets/css/style.default.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -58,7 +60,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
             <h4><?php echo $row["name"]; ?></h4>
             <small class="text-muted"><?php echo $row["bio"]; ?></small>
         </div>
-        <form method="post" action="/login/auth/check.php<?php echo $url_full;?>">
+        <form method="post" action="<?php echo $config["root"]; ?>/login/auth/check.php<?php echo $url_full;?>">
             <input type="password" name="password" class="form-control" placeholder="Enter your password" />
             <button class="btn btn-success btn-block">Unlock</button>
         </form>
@@ -67,13 +69,13 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 </section>
 
 
-<script src="/assets/js/jquery-1.10.2.min.js"></script>
-<script src="/assets/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/modernizr.min.js"></script>
-<script src="/assets/js/retina.min.js"></script>
+<script src="<?php echo $config["root"]; ?>/assets/js/jquery-1.10.2.min.js"></script>
+<script src="<?php echo $config["root"]; ?>/assets/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="<?php echo $config["root"]; ?>/assets/js/bootstrap.min.js"></script>
+<script src="<?php echo $config["root"]; ?>/assets/js/modernizr.min.js"></script>
+<script src="<?php echo $config["root"]; ?>/assets/js/retina.min.js"></script>
 
-<script src="/assets/js/custom.js"></script>
+<script src="<?php echo $config["root"]; ?>/assets/js/custom.js"></script>
 
 </body>
 </html>

@@ -29,7 +29,7 @@ else {
 
 		<!-- Header -->
 			<header id="header">
-				<h1>Some Hummingbird App</h1>
+				<h1>Welcome to HBSS</h1>
 				<p>Do some cool shit with your account and watch some stuff at the same time! <p><a href="hummingbird.me">Humingbird.me</a>.</p>
 			</header>
 
@@ -53,7 +53,7 @@ else {
 					<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 				</ul>
 				<ul class="copyright">
-					<li>&copy; Untitled.</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
+					<li>&copy; HBSS.</li><li>Credits: <a href="https://hbss.dev/">HBSS</a></li>
 				</ul>
 			</footer>
 
